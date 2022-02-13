@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<users>
+  <user ID="1">
+    <name>Bill </name>
+    <surname>Gates</surname>
+    <phone>+7-985-269-27-47</phone>
+  </user>
+  <user ID="2">
+    <name>Larry </name>
+    <surname>Brin</surname>
+    <phone>+7-985-269-27-47</phone>
+  </user>
+</users>

@@ -1,0 +1,92 @@
+﻿<Window x:Class="Interview.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Interview"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:col="clr-namespace:System.Collections;assembly=System.Runtime"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="550"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="none"
+        WindowStartupLocation="CenterScreen">
+    <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignCardBackground}" 
+                         Margin="15" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+        <materialDesign:DialogHost CloseOnClickAway="true" x:Name="DialogHost">
+
+            <StackPanel >
+
+                <materialDesign:PopupBox HorizontalAlignment="Right" Margin="0 20 10 10" RenderTransformOrigin="0.559,-0.577">
+                    <StackPanel>
+                        <Button Content="Exit Apllication" Click="Exit_click"/>
+                        <Button Content="Add New Person" Click="Person_click"/>
+                    </StackPanel>
+                   
+                </materialDesign:PopupBox>
+                <TextBlock Text="Welcome to my notebook" Margin="110 0" FontSize="20" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+                <TextBox Margin="0 20"  >
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <Style.Resources>
+                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Center"  Stretch="None">
+                                    <VisualBrush.Visual>
+                                        <Label Content="Please enter your data" Foreground="Black" Style="{StaticResource MaterialDesignLabel}"/>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Style.Resources>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+
+                <Grid>
+                    <ListView x:Name="box" >
+                        <ListView.View>
+                                
+                                <GridView x:Name="grid"  >
+                                    
+
+                                    <GridViewColumn DisplayMemberBinding="{Binding ID }" Header="ID" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Name }" Header="Name"></GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Surname"></GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone"></GridViewColumn>
+                                    <GridViewColumn >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="rash.png" Width="60" Height="20" MouseDown="trash_click" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                </GridView>
+                            </ListView.View>
+                        
+                       
+
+                    </ListView>
+                </Grid>
+
+
+
+
+
+            </StackPanel>
+            
+        </materialDesign:DialogHost>
+        
+       
+        
+    </materialDesign:Card>
+</Window>
