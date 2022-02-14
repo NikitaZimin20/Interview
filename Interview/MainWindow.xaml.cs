@@ -39,7 +39,7 @@ namespace Interview
 
             foreach (XmlElement xnode in xRoot)
             {
-                user.Add(new CustomArray { ID=xnode.Attributes.GetNamedItem("ID").Value,Name = xnode.ChildNodes.Item(0).InnerText.Trim(), Surname = xnode.ChildNodes.Item(1).InnerText.Trim(), Phone = xnode.ChildNodes.Item(2).InnerText.Trim() });
+                user.Add(new CustomArray { ID = xnode.Attributes.GetNamedItem("ID").Value, Name = xnode.ChildNodes.Item(0).InnerText.Trim(), Surname = xnode.ChildNodes.Item(1).InnerText.Trim(), Phone = xnode.ChildNodes.Item(2).InnerText.Trim() });
             }
 
         }
@@ -56,7 +56,7 @@ namespace Interview
         {
             TakeScreen();
         }
-       
+
 
         private void Person_click(object sender, RoutedEventArgs e)
         {
@@ -72,48 +72,56 @@ namespace Interview
             XmlElement? xRoot = xDoc.DocumentElement;
             foreach (XmlElement item in xRoot)
             {
-                if (item.Attributes.GetNamedItem("ID").Value==id)
+                if (item.Attributes.GetNamedItem("ID").Value == id)
                 {
                     xRoot.RemoveChild(item);
                 }
             }
             xDoc.Save("XMLFile1.xml");
-            
+
         }
-       
-        private  void trash_click(object sender, MouseButtonEventArgs e)
+
+        private void trash_click(object sender, MouseButtonEventArgs e)
         {
             try
             {
                 var information = box.SelectedItem;
                 string id = user[box.SelectedIndex].ID;
-                box.Items.Remove(information);
+                if (MessageBox.Show("Do you want to delete this field?",
+                    "Attention", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    box.Items.Remove(information);
+                    DeleteFromXml(id);
+                }
+                else
+                {
+                    
+                }
 
-                DeleteFromXml(id);
             }
             catch (Exception)
             {
 
                 MessageBox.Show("Choose element");
             }
-            
+
         }
 
         private void Exit_click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-       
-       
+
+
         private void Field_changed(object sender, TextChangedEventArgs e)
         {
-            
-            if (findbox.Text!=string.Empty)
+
+            if (findbox.Text != string.Empty)
             {
                 box.Items.Clear();
                 foreach (var item in user)
                 {
-                   
+
                     if (item.ID == findbox.Text || item.Name == findbox.Text || item.Surname == findbox.Text || item.Phone == findbox.Text)
                     {
                         box.Items.Add(item);
@@ -126,7 +134,12 @@ namespace Interview
                 TakeScreen();
             }
 
-            
+
+        }
+
+        private void Change_click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

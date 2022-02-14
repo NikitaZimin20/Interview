@@ -33,7 +33,11 @@ namespace Interview
         private string GetLastID()
         {
             var xdoc = XDocument.Load("XMLFile1.xml");
-            var lastelement= xdoc.Root.Elements("user").Last();
+            XElement lastelement = xdoc.Root.Elements("user").LastOrDefault();
+            if (lastelement is null)
+            {
+                return "0";
+            }
             var value = int.Parse(lastelement.Attribute("ID").Value)+1;
             return value.ToString();
               

@@ -47,7 +47,7 @@ namespace Interview
                     case "Phone":
                         if (string.IsNullOrWhiteSpace(Phone))
                             result = "Use this format +7-(xxx)-xxx-xx-xx";
-                        else if (Username.Length < 18 )
+                        else if (Username.Length < 15 )
                             result = "Fill all data";
 
                         break;

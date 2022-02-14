@@ -20,8 +20,10 @@
 
                 <materialDesign:PopupBox HorizontalAlignment="Right" Margin="0 20 10 10" RenderTransformOrigin="0.559,-0.577">
                     <StackPanel>
-                        <Button Content="Exit Apllication" Click="Exit_click"/>
                         <Button Content="Add New Person" Click="Person_click"/>
+                        <Button Content="Change information" Click="Change_click"/>
+                        <Button Content="Exit Apllication" Click="Exit_click"/>
+                        
                     </StackPanel>
 
                 </materialDesign:PopupBox>
