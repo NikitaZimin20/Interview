@@ -23,10 +23,10 @@
                         <Button Content="Exit Apllication" Click="Exit_click"/>
                         <Button Content="Add New Person" Click="Person_click"/>
                     </StackPanel>
-                   
+
                 </materialDesign:PopupBox>
                 <TextBlock Text="Welcome to my notebook" Margin="110 0" FontSize="20" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
-                <TextBox Margin="0 20"  >
+                <TextBox Margin="0 20" TextChanged="Field_changed" x:Name="findbox"  >
                     <TextBox.Style>
                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                             <Style.Resources>
@@ -52,28 +52,32 @@
                 </TextBox>
 
                 <Grid>
-                    <ListView x:Name="box" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="81*"/>
+                        <ColumnDefinition Width="23*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="box" Grid.ColumnSpan="2" >
                         <ListView.View>
-                                
-                                <GridView x:Name="grid"  >
-                                    
 
-                                    <GridViewColumn DisplayMemberBinding="{Binding ID }" Header="ID" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Name }" Header="Name"></GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Surname"></GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone"></GridViewColumn>
-                                    <GridViewColumn >
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Image Source="rash.png" Width="60" Height="20" MouseDown="trash_click" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                            <GridView x:Name="grid"  >
 
-                                </GridView>
-                            </ListView.View>
-                        
-                       
+
+                                <GridViewColumn DisplayMemberBinding="{Binding ID }" Header="ID" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Name }" Header="Name"></GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Surname"></GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone"></GridViewColumn>
+                                <GridViewColumn >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="rash.png" Width="60" Height="20" MouseDown="trash_click" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                            </GridView>
+                        </ListView.View>
+
+
 
                     </ListView>
                 </Grid>
@@ -83,10 +87,10 @@
 
 
             </StackPanel>
-            
+
         </materialDesign:DialogHost>
-        
-       
-        
+
+
+
     </materialDesign:Card>
 </Window>

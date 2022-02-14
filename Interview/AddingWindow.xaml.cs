@@ -16,16 +16,18 @@ using System.Xml.Linq;
 
 namespace Interview
 {
-    /// <summary>
-    /// Логика взаимодействия для AddingWindow.xaml
-    /// </summary>
     public partial class AddingWindow : Window
     {
        private XmlDocument _xd;
         public AddingWindow()
         {
             InitializeComponent();
+            Loaded += AddingWindow_Loaded;
+        }
 
+        private void AddingWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         private string GetLastID()

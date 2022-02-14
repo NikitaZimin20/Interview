@@ -23,6 +23,7 @@ namespace Interview
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<string> _data;
         private List<CustomArray> user;
         public MainWindow()
         {
@@ -42,14 +43,18 @@ namespace Interview
             }
 
         }
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void TakeScreen()
         {
             LoadFromXml();
-            
+
             foreach (var item in user)
-            {             
-                    box.Items.Add(item);             
-            }           
+            {
+                box.Items.Add(item);
+            }
+        }
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            TakeScreen();
         }
        
 
@@ -97,6 +102,31 @@ namespace Interview
         private void Exit_click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+       
+       
+        private void Field_changed(object sender, TextChangedEventArgs e)
+        {
+            
+            if (findbox.Text!=string.Empty)
+            {
+                box.Items.Clear();
+                foreach (var item in user)
+                {
+                   
+                    if (item.ID == findbox.Text || item.Name == findbox.Text || item.Surname == findbox.Text || item.Phone == findbox.Text)
+                    {
+                        box.Items.Add(item);
+                    }
+                }
+            }
+            else
+            {
+                box.Items.Clear();
+                TakeScreen();
+            }
+
+            
         }
     }
 }
