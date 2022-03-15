@@ -18,36 +18,24 @@ using System.Xml.Linq;
 
 namespace Interview
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private List<string> _data;
-        private List<CustomArray> user;
+        private List<CustomArray> _user;
+        private XmlWorker _worker;
         public MainWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
         }
-        private void LoadFromXml()
-        {
-            user = new List<CustomArray>();
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load("XMLFile1.xml");
-            XmlElement? xRoot = xDoc.DocumentElement;
 
-            foreach (XmlElement xnode in xRoot)
-            {
-                user.Add(new CustomArray { ID = xnode.Attributes.GetNamedItem("ID").Value, Name = xnode.ChildNodes.Item(0).InnerText.Trim(), Surname = xnode.ChildNodes.Item(1).InnerText.Trim(), Phone = xnode.ChildNodes.Item(2).InnerText.Trim() });
-            }
-
-        }
         private void TakeScreen()
         {
-            LoadFromXml();
+            _worker = new XmlWorker();
+            _user = new List<CustomArray>();
+            _worker.LoadFromXml(_user);
 
-            foreach (var item in user)
+            foreach (var item in _user)
             {
                 box.Items.Add(item);
             }
@@ -65,37 +53,20 @@ namespace Interview
             this.Hide();
         }
 
-        private void DeleteFromXml(string id)
-        {
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load("XMLFile1.xml");
-            XmlElement? xRoot = xDoc.DocumentElement;
-            foreach (XmlElement item in xRoot)
-            {
-                if (item.Attributes.GetNamedItem("ID").Value == id)
-                {
-                    xRoot.RemoveChild(item);
-                }
-            }
-            xDoc.Save("XMLFile1.xml");
-
-        }
+       
 
         private void trash_click(object sender, MouseButtonEventArgs e)
         {
             try
             {
+                _worker = new XmlWorker();
                 var information = box.SelectedItem;
-                string id = user[box.SelectedIndex].ID;
+                string id = _user[box.SelectedIndex].ID;
                 if (MessageBox.Show("Do you want to delete this field?",
                     "Attention", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     box.Items.Remove(information);
-                    DeleteFromXml(id);
-                }
-                else
-                {
-                    
+                   _worker.DeleteFromXml(id);
                 }
 
             }
@@ -119,7 +90,7 @@ namespace Interview
             if (findbox.Text != string.Empty)
             {
                 box.Items.Clear();
-                foreach (var item in user)
+                foreach (var item in _user)
                 {
 
                     if (item.ID == findbox.Text || item.Name == findbox.Text || item.Surname == findbox.Text || item.Phone == findbox.Text)

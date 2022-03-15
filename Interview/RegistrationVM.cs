@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Interview
@@ -13,6 +14,7 @@ namespace Interview
         private string _username;
         private string _phone;
         private string _surname;
+        private static readonly Regex _regex = new Regex("[^0-9.+]+");
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
 
@@ -46,11 +48,20 @@ namespace Interview
                         break;
                     case "Phone":
                         if (string.IsNullOrWhiteSpace(Phone))
-                            result = "Use this format +7-(xxx)-xxx-xx-xx";
-                        else if (Username.Length < 15 )
-                            result = "Fill all data";
+                            result = "Field  cannot be empty";
 
+                        else if (_regex.IsMatch(Phone))
+                        {
+                            result = "You should use numeric numbers";
+                        }
+                        else if (Phone.Length!=12)
+                        {
+                            result = "It should conatain 11 numbers";
+                        }
+                            
                         break;
+                 
+                  
                 }
 
                 if (ErrorCollection.ContainsKey(name))
@@ -84,5 +95,6 @@ namespace Interview
             get { return _phone; }
             set { OnPropertyChanged(ref _phone, value); }
         }
+       
     }
 }

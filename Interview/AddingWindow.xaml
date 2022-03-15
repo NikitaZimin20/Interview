@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:col="clr-namespace:System.Collections;assembly=System.Runtime"
-        xmlns:local="clr-namespace:Interview" d:DataContext="{d:DesignInstance Type=local:RegistrationVM}"
+        xmlns:local="clr-namespace:Interview" d:DataContext="{d:DesignInstance Type=local:RegistrationVM}" 
         mc:Ignorable="d"
         Title="AddingWindow" Height="450" Width="500">
     <Window.DataContext>
         <local:RegistrationVM/>
     </Window.DataContext>
+    <Window.Resources>
+        <local:StringToBoolConverter x:Key="StringToBoolConverter" />
+        <local:StringToPhoneConverter x:Key="StringToPhoneConverter"/>
+    </Window.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -35,22 +39,33 @@
         <TextBlock Text="Name" Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Margin="0,20,0,20" Width="53" />
         <TextBlock Text="Surname" Grid.Row="2" HorizontalAlignment="Center" FontSize="20" Margin="0,20,0,20" Width="79"/>
         <TextBlock Text="Phone" Grid.Row="3" HorizontalAlignment="Center" FontSize="20" Margin="0,20,0,20" Width="57"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Style= "{DynamicResource  MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Fill Name"  
+        <TextBox Name="username" Grid.Row="1" Grid.Column="1" Style= "{DynamicResource  MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Fill Name"  
                  VerticalAlignment="Top" Height="50"  FontSize="14" RenderTransformOrigin="0.5,0.5" Margin="0,10,10,0" Cursor="IBeam" 
-                 BorderThickness="1" x:Name="nametxt" Text="{Binding Username, ValidatesOnDataErrors=True,
+                 BorderThickness="1"  Text="{Binding Username, ValidatesOnDataErrors=True,
                 UpdateSourceTrigger=PropertyChanged}"
                      ToolTip="{Binding ErrorCollection[Username]}" SelectionOpacity="1"  />
 
-        <TextBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Fill Surname"  VerticalAlignment="Top" Height="50"  FontSize="14" RenderTransformOrigin="0.5,0.5"
-                 Margin="0,10,10,0" Cursor="IBeam" BorderThickness="1" x:Name="surtxt" Text="{Binding Surname, ValidatesOnDataErrors=True,
+        <TextBox Name="surname" Grid.Row="2" Grid.Column="1" Style="{DynamicResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Fill Surname"  VerticalAlignment="Top" Height="50"  FontSize="14" RenderTransformOrigin="0.5,0.5"
+                 Margin="0,10,10,0" Cursor="IBeam" BorderThickness="1"  Text="{Binding Surname, ValidatesOnDataErrors=True,
                 UpdateSourceTrigger=PropertyChanged}"
                      ToolTip="{Binding ErrorCollection[Username]}" SelectionOpacity="1" />
-        <TextBox  Grid.Row="3" Grid.Column="1" Style="{DynamicResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Fill Phone Number" 
-                  VerticalAlignment="Top" Height="50"  FontSize="14" RenderTransformOrigin="0.5,0.5" Margin="0,10,10,0" Cursor="IBeam" BorderThickness="1" x:Name="phontxt"
-                  Text="{Binding Phone, ValidatesOnDataErrors=True,
+        <TextBox Name="phone" Grid.Row="3" Grid.Column="1" Style="{DynamicResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Fill Phone Number" 
+                  VerticalAlignment="Top" Height="50"  FontSize="14" RenderTransformOrigin="0.5,0.5" Margin="0,10,10,0" Cursor="IBeam" BorderThickness="1" 
+                  Text="{Binding Phone,Converter={StaticResource StringToPhoneConverter} ,ValidatesOnDataErrors=True,
                 UpdateSourceTrigger=PropertyChanged}" 
-                     ToolTip="{Binding ErrorCollection[Phone]}" SelectionOpacity="1"/>
-        <Button Grid.Row="4" Grid.Column="1" Content="Apply" Margin="15,10,10,15" Width="250" Height="100" FontStretch="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Apply_click" ></Button>
+                     ToolTip="{Binding ErrorCollection[Phone]}" SelectionOpacity="1" />
+        <Button Grid.Row="4" Grid.Column="1" Content="Apply" Margin="15,10,10,15" Width="250" Height="100" FontStretch="Normal" HorizontalAlignment="Center"
+                 Name="Apply_btn" VerticalAlignment="Center" Click="Apply_click" 
+                 Cursor="Hand">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource StringToBoolConverter}">
+                    <Binding ElementName="username" Path="Text"/>
+                    <Binding ElementName="surname" Path="Text"/>
+                    <Binding ElementName="phone" Path="Text"/>
+                </MultiBinding>
+            </Button.IsEnabled> 
+        </Button>  
+
 
 
     </Grid>

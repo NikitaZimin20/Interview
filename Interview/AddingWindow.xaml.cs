@@ -18,45 +18,21 @@ namespace Interview
 {
     public partial class AddingWindow : Window
     {
-       private XmlDocument _xd;
+       
         public AddingWindow()
         {
             InitializeComponent();
-            Loaded += AddingWindow_Loaded;
-        }
-
-        private void AddingWindow_Loaded(object sender, RoutedEventArgs e)
-        {
             
-        }
-
-        private string GetLastID()
-        {
-            var xdoc = XDocument.Load("XMLFile1.xml");
-            XElement lastelement = xdoc.Root.Elements("user").LastOrDefault();
-            if (lastelement is null)
-            {
-                return "0";
-            }
-            var value = int.Parse(lastelement.Attribute("ID").Value)+1;
-            return value.ToString();
-              
-        }
-        private void AddToXML()
-        {
-            _xd = new XmlDocument();
-            _xd.Load("XMLFile1.xml");
-            XmlNode nl = _xd.SelectSingleNode("users");
-            XmlDocument xd2 = new XmlDocument();
-            xd2.LoadXml("<user ID='"+GetLastID()+"'><name>" + nametxt.Text + "</name><surname>" + surtxt.Text + "</surname><phone>" + phontxt.Text + "</phone></user>");
-            XmlNode n = _xd.ImportNode(xd2.FirstChild, true);
-            nl.AppendChild(n);
-            _xd.Save("XMLFile1.xml");
+           
         }
 
        private void Apply_click(object sender, RoutedEventArgs e)
         {
-            AddToXML();
+            MainWindow main = new MainWindow();
+            XmlWorker worker = new XmlWorker();
+            worker.AddToXML(username.Text,surname.Text,phone.Text);
+            main.Show();
+            this.Hide();
         }
 
         private void Back_click(object sender, MouseButtonEventArgs e)
@@ -65,5 +41,7 @@ namespace Interview
             main.Show();
             this.Close();
         }
+
+        
     }
 }
