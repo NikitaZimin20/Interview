@@ -14,6 +14,7 @@
         <local:StringToBoolConverter x:Key="StringToBoolConverter" />
         <local:StringToPhoneConverter x:Key="StringToPhoneConverter"/>
     </Window.Resources>
+    
     <Grid>
 
         <Grid.ColumnDefinitions>

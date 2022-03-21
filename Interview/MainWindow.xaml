@@ -12,8 +12,10 @@
         AllowsTransparency="True"
         WindowStyle="none"
         WindowStartupLocation="CenterScreen">
+    
     <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignCardBackground}" 
                          Margin="15" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+        
         <materialDesign:DialogHost CloseOnClickAway="true" x:Name="DialogHost">
 
             <StackPanel >

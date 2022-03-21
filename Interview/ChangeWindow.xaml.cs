@@ -14,14 +14,21 @@ using System.Windows.Shapes;
 
 namespace Interview
 {
-    /// <summary>
-    /// Логика взаимодействия для Change.xaml
-    /// </summary>
-    public partial class Change : Window
+    public partial class ChangeWindow : Window
     {
-        public Change()
+        public ChangeWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            XmlWorker worker = new XmlWorker();
+            MainWindow main = new MainWindow();
+            worker.ChangeXML(ID.Text,username.Text,surname.Text,phone.Text);
+            main.Show();
+            this.Hide();
+
         }
     }
 }

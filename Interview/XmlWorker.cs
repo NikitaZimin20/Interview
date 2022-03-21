@@ -41,17 +41,44 @@ namespace Interview
         public void AddToXML(string username,string surname,string phone)
         {
             var xd = new XmlDocument();
-            xd.Load("XMLFile1.xml");
+            xd.Load(Configuraton.FilePath);
             XmlNode nl = xd.SelectSingleNode("users");
             XmlDocument xd2 = new XmlDocument();
             xd2.LoadXml("<user ID='" + GetLastID() + "'><name>" + username + "</name><surname>" + surname + "</surname><phone>" + phone + "</phone></user>");
             XmlNode n = xd.ImportNode(xd2.FirstChild, true);
             nl.AppendChild(n);
-            xd.Save("XMLFile1.xml");
+            xd.Save(Configuraton.FilePath);
+        }
+        public void ChangeXML(string InputId,string name,string surname,string phone )
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(Configuraton.FilePath);
+
+          
+            XmlNodeList aNodes = doc.SelectNodes("users/user");
+
+          
+            foreach (XmlNode aNode in aNodes)
+            {            
+                XmlAttribute idAttribute = aNode.Attributes["ID"];
+                if (idAttribute != null)
+                {
+                    string currentValue = idAttribute.Value;
+
+                    
+                    if (currentValue==InputId)
+                    {
+                        aNode.ChildNodes.Item(0).InnerText = name;
+                        aNode.ChildNodes.Item(1).InnerText = surname;
+                        aNode.ChildNodes.Item(2).InnerText = phone;
+                    }
+                }
+            }
+            doc.Save(Configuraton.FilePath);
         }
         private string GetLastID()
         {
-            var xdoc = XDocument.Load("XMLFile1.xml");
+            var xdoc = XDocument.Load(Configuraton.FilePath);
             XElement lastelement = xdoc.Root.Elements("user").LastOrDefault();
             if (lastelement is null)
             {

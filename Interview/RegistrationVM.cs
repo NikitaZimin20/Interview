@@ -1,8 +1,6 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -14,6 +12,7 @@ namespace Interview
         private string _username;
         private string _phone;
         private string _surname;
+        private string _id;
         private static readonly Regex _regex = new Regex("[^0-9.+]+");
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
@@ -60,7 +59,14 @@ namespace Interview
                         }
                             
                         break;
-                 
+                    case "ID":
+                        if(string.IsNullOrWhiteSpace(ID))
+                            result = "Field  cannot be empty";
+                        else if (_regex.IsMatch(ID))
+                        {
+                            result = "It allows only numeric";
+                        }
+                        break;
                   
                 }
 
@@ -73,7 +79,14 @@ namespace Interview
                 return result;
             }
         }
-
+        public string ID
+        {
+            get { return _id ; }
+            set
+            {
+                OnPropertyChanged(ref _id, value);
+            }
+        }
         public string Username
         {
             get { return _username; }
