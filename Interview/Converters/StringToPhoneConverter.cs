@@ -22,7 +22,7 @@ namespace Interview
                 case 1:
                     return Regex.Replace(phoneNo, @"(\d{1})","+7$1");
                 case 12:
-                    return Regex.Replace(phoneNo, @"(?:\+7\D*)?([2-9]\d{2})\D*([2-9]\d{2})\D*(\d{4})", "+7($1)-$2-$3");
+                    return Regex.Replace(phoneNo, @"(?:\+7\D*)?([0-9]\d{2})\D*([0-9]\d{2})\D*(\d{2})\D*(\d{2})", "+7($1)-$2-$3-$4");
                 default:
                     return phoneNo;
             }

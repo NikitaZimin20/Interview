@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace Interview
 {
-    public class CustomArray:IEnumerable
+    public class UserModel:IEnumerable
     {
         List<string> _list;
-        public CustomArray()
+        public UserModel()
         {
             _list = new List<string>() { ID, Name, Surname, Phone };
         }

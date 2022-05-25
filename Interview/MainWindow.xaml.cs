@@ -10,7 +10,7 @@ namespace Interview
     public partial class MainWindow : Window
     {
         private List<string> _data;
-        private List<CustomArray> _user;
+        private List<UserModel> _user;
         private XmlWorker _worker;
         public MainWindow()
         {
@@ -21,7 +21,7 @@ namespace Interview
         private void TakeScreen()
         {
             _worker = new XmlWorker();
-            _user = new List<CustomArray>();
+            _user = new List<UserModel>();
             _worker.LoadFromXml(_user);
 
             foreach (var item in _user)
@@ -93,8 +93,6 @@ namespace Interview
                 box.Items.Clear();
                 TakeScreen();
             }
-
-
         }
 
         private void Change_click(object sender, RoutedEventArgs e)

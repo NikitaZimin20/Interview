@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="arrow.png" />
     <Resource Include="rash.png" />
   </ItemGroup>

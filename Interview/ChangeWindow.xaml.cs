@@ -30,5 +30,17 @@ namespace Interview
             this.Hide();
 
         }
+
+        private void Back_click(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow main = new();
+            main.Show();
+            this.Hide();
+        }
+
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

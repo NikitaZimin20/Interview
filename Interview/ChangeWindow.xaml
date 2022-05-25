@@ -14,16 +14,19 @@
         <local:StringToPhoneConverter x:Key="StringToPhoneConvert"/>
     </Window.Resources>
     <Grid Background="#FFDADADA">
-        <Border MinWidth="400" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="10" MaxWidth="800" Height="584">
+        <Border MinWidth="400" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="10" MaxWidth="850" Height="590">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
             </Border.Effect>
 
             <StackPanel>
-                <materialDesign:PopupBox HorizontalAlignment="Right">
-
-                </materialDesign:PopupBox>
-                <TextBlock Text="Change Data" FontSize="30" FontWeight="Bold" Margin="120 0 0 20"/>
+                <StackPanel Orientation="Horizontal" Margin="0 -30"  >
+                    <Image  Source="arrow.png" Height="30" Margin="0,21,0,36" MouseDown="Back_click"/>
+                    <materialDesign:PopupBox  Margin="370 10 0 36" Width="40" Height="70">
+                        <Button Content="Exit" Click="ExitClick"/>
+                    </materialDesign:PopupBox>
+                </StackPanel> 
+                <TextBlock Text="Change Data" FontSize="30" FontWeight="Bold" Margin="120 20 0 20"/>
                 <TextBox Name="ID" materialDesign:HintAssist.Hint="ID" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5 10 20" FontSize="20"
                          Text="{Binding ID, ValidatesOnDataErrors=True,
                 UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding ErrorCollection[ID]}" Cursor="IBeam"/>
@@ -38,7 +41,7 @@
                          Text="{Binding Phone,Converter={StaticResource StringToPhoneConvert} ,ValidatesOnDataErrors=True,
                 UpdateSourceTrigger=PropertyChanged}" 
                      ToolTip="{Binding ErrorCollection[Phone]}" Margin="0 5 10 20" FontSize="20"/>
-                <Button Content="Confirm" Margin="0 40" HorizontalAlignment="Center" Height="42" Width="230" Click="Button_Click" Cursor="Hand" >
+                <Button Content="Confirm" Margin="0 20" HorizontalAlignment="Center" Height="42" Width="230" Click="Button_Click" Cursor="Hand" >
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource StringToBoolConverter}">
                             <Binding ElementName="username" Path="Text"/>

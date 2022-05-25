@@ -32,7 +32,8 @@
         <StackPanel Grid.ColumnSpan="3" Margin="0,0,0,87" Grid.RowSpan="2" Background="#FF9C27B0">
 
         </StackPanel>
-        <Image  Source="arrow.png" Height="30" Margin="0,21,0,36" MouseDown="Back_click"/>
+        <materialDesign:PackIcon Kind="ArrowBack" Height="30" Margin="0,21,0,36" MouseDown="Back_click"/>
+        
         <materialDesign:PopupBox Grid.Column="3" HorizontalAlignment="Right" Margin="0 0 10 15">
             <Button Content="Exit Application"/>
         </materialDesign:PopupBox>

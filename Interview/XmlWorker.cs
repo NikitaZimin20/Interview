@@ -10,7 +10,7 @@ namespace Interview
 {
     class XmlWorker
     {
-        public void LoadFromXml(List<CustomArray> user)
+        public void LoadFromXml(List<UserModel> user)
         {
            
             XmlDocument xDoc = new XmlDocument();
@@ -19,7 +19,7 @@ namespace Interview
 
             foreach (XmlElement xnode in xRoot)
             {
-                user.Add(new CustomArray { ID = xnode.Attributes.GetNamedItem("ID").Value, Name = xnode.ChildNodes.Item(0).InnerText.Trim(), Surname = xnode.ChildNodes.Item(1).InnerText.Trim(), Phone = xnode.ChildNodes.Item(2).InnerText.Trim() });
+                user.Add(new UserModel { ID = xnode.Attributes.GetNamedItem("ID").Value, Name = xnode.ChildNodes.Item(0).InnerText.Trim(), Surname = xnode.ChildNodes.Item(1).InnerText.Trim(), Phone = xnode.ChildNodes.Item(2).InnerText.Trim() });
             }
 
         }
@@ -38,6 +38,8 @@ namespace Interview
             xDoc.Save(Configuraton.FilePath);
 
         }
+
+        
         public void AddToXML(string username,string surname,string phone)
         {
             var xd = new XmlDocument();
